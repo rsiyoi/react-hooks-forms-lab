@@ -24,9 +24,9 @@ function ShoppingList({ items }) {
 
 
   const itemsToDisplay = items.filter((item) => {
-    if (selectedCategory === "All") return true;
-const matchesSearch = item.name.toLowerCase().includes(searchText.toLowerCase());
-    return item.category === selectedCategory && matchesSearch;
+    const matchesSearch = item.name.toLowerCase().includes(searchText.toLowerCase());
+    const matchesCategory = selectedCategory === "All" || item.category === selectedCategory;
+    return matchesCategory && matchesSearch;
   });
 
   return (
@@ -34,7 +34,7 @@ const matchesSearch = item.name.toLowerCase().includes(searchText.toLowerCase())
        <ItemForm onItemFormSubmit={handleItemFormSubmit} />
       <Filter onCategoryChange={handleCategoryChange} 
         onSearchChange={handleSearchChange}
-        searchText={searchText}
+        search={searchText}
         category={selectedCategory}
       
       />
